@@ -9,4 +9,5 @@ public class Constants {
 
     public static final String TABLE_NAME = "student";
     public static final String DATABASE_NAME = "shashankbhat.db";
+    public static final String STUDENT_OBJ = "student_obj";
 }

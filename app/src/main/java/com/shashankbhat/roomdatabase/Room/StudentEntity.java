@@ -1,5 +1,9 @@
 package com.shashankbhat.roomdatabase.Room;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.PrimaryKey;
 
@@ -13,10 +17,11 @@ import static com.shashankbhat.roomdatabase.Utils.Constants.TABLE_NAME;
 
 
 @androidx.room.Entity(tableName = TABLE_NAME)
-public class StudentEntity {
+public class StudentEntity implements Parcelable {
 
     @PrimaryKey
     @ColumnInfo(name = "erp")
+    @NonNull
     private String erp;
 
     @ColumnInfo(name = "student_photo")
@@ -50,6 +55,46 @@ public class StudentEntity {
         this.mother_name = mother_name;
         this.father_mobile = father_mobile;
     }
+
+    protected StudentEntity(Parcel in) {
+        erp = in.readString();
+        student_photo = in.readString();
+        first_name = in.readString();
+        second_name = in.readString();
+        father_name = in.readString();
+        role = in.readString();
+        mother_name = in.readString();
+        father_mobile = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(erp);
+        dest.writeString(student_photo);
+        dest.writeString(first_name);
+        dest.writeString(second_name);
+        dest.writeString(father_name);
+        dest.writeString(role);
+        dest.writeString(mother_name);
+        dest.writeString(father_mobile);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<StudentEntity> CREATOR = new Creator<StudentEntity>() {
+        @Override
+        public StudentEntity createFromParcel(Parcel in) {
+            return new StudentEntity(in);
+        }
+
+        @Override
+        public StudentEntity[] newArray(int size) {
+            return new StudentEntity[size];
+        }
+    };
 
     public String getErp() {
         return erp;
