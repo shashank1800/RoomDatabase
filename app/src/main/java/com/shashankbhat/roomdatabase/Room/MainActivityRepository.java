@@ -17,13 +17,12 @@ import static com.shashankbhat.roomdatabase.Utils.Constants.STUDENT_OBJ;
  * <p>
  * shashankbhat1800@gmail.com
  */
-public class DataRepository extends AndroidViewModel {
+public class MainActivityRepository extends AndroidViewModel {
 
     private StudentDao studentDao;
-    private StudentEntity studentEntity;
     private Application application;
 
-    public DataRepository(Application application){
+    public MainActivityRepository(Application application){
         super(application);
         this.application = application;
         StudentDatabase database = StudentDatabase.getDatabase(application);

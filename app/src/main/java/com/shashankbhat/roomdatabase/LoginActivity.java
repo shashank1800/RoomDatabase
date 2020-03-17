@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.shashankbhat.roomdatabase.Room.DataRepository;
+import com.shashankbhat.roomdatabase.Room.MainActivityRepository;
 import com.shashankbhat.roomdatabase.Room.StudentEntity;
 
 import org.json.JSONException;
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     Button submit;
 
     String url = "https://erp.letseduvate.com/qbox/activity_app/login/";
-    private DataRepository dataRepository;
+    private MainActivityRepository mainActivityRepository;
 
 
     @Override
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        dataRepository = new DataRepository(getApplication());
+        mainActivityRepository = new MainActivityRepository(getApplication());
         RequestQueue queue = Volley.newRequestQueue(this);
 
         username.setText("1705510054");
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         submit.setOnClickListener(view -> {
 
-            dataRepository.findOneStudent(username.getText().toString());
+            mainActivityRepository.findOneStudent(username.getText().toString());
 
             JSONObject params = new JSONObject();
             try {
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String res = erp + student_photo + first_name + second_name + father_name + role + mother_name + father_mobile;
 
                                     StudentEntity studentEntity = new StudentEntity(erp, student_photo, first_name, second_name, father_name, role, mother_name, father_mobile);
-                                    dataRepository.insert(studentEntity);
+                                    mainActivityRepository.insert(studentEntity);
 
                                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                     Bundle bundle = new Bundle();
